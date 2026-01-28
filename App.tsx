@@ -128,7 +128,7 @@ const App: React.FC = () => {
           )}
           
           <div className="-mx-4 mb-4">
-            <div className="flex space-x-2 pb-2 overflow-x-auto px-4">
+            <div className="flex space-x-2 pb-2 overflow-x-auto px-4 no-scrollbar">
               {labs.map(lab => (
                 <button
                   key={lab.id}

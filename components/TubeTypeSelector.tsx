@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { TubeType, TUBE_COLORS, TUBE_TYPES, TUBE_BODY_COLORS, TUBE_CAP_GRADIENTS } from '../types';
+import { TubeType, TUBE_COLORS, TUBE_TYPES } from '../types';
+import { CheckCircleIcon } from './icons';
 
 interface TubeTypeSelectorProps {
   selectedValue: TubeType | null;
@@ -9,29 +10,27 @@ interface TubeTypeSelectorProps {
 
 const TubeTypeSelector: React.FC<TubeTypeSelectorProps> = ({ selectedValue, onChange }) => {
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+    <div className="grid grid-cols-3 gap-3">
       {TUBE_TYPES.map(tubeType => {
         const isSelected = selectedValue === tubeType;
-        const [_, borderColor] = TUBE_COLORS[tubeType].split(' ');
-        const tubeBodyClasses = TUBE_BODY_COLORS[tubeType];
-        const capGradientClasses = TUBE_CAP_GRADIENTS[tubeType];
+        const [capBgClass] = TUBE_COLORS[tubeType].split(' ');
 
         return (
           <button
             key={tubeType}
             onClick={() => onChange(tubeType)}
-            className={`flex flex-col items-center justify-center space-y-2 p-2 rounded-lg transition-all duration-200 ${
-              isSelected ? 'bg-red-50 ring-2 ring-red-500' : 'bg-slate-50 hover:bg-slate-100'
+            className={`relative flex flex-col items-center justify-center space-y-1.5 p-3 rounded-xl border-2 transition-all duration-200 ${
+              isSelected ? 'border-red-500 bg-red-50/50' : 'border-slate-200 bg-white hover:border-red-300'
             }`}
           >
-            <div className="relative w-10 h-12 flex items-end justify-center">
-              {/* More realistic cap with gradient, shadow, and highlight */}
-              <div className={`absolute w-8 h-4 rounded-t-lg border-b-4 top-0 bg-gradient-to-b shadow-inner ${capGradientClasses} ${borderColor}`}>
-                <div className="absolute top-[1px] left-[3px] right-[3px] h-[2px] bg-white/40 rounded-full opacity-50"></div>
-              </div>
-              <div className={`w-4 h-8 border rounded-b-md ${tubeBodyClasses}`}></div>
+            {isSelected && (
+              <CheckCircleIcon className="absolute -top-1.5 -right-1.5 w-6 h-6 text-red-500 bg-white rounded-full" />
+            )}
+            <div className="w-6 h-10 flex flex-col items-center">
+              <div className={`w-5 h-2 ${capBgClass} rounded-t-sm`}></div>
+              <div className="w-3 h-8 border-x border-b border-gray-300 bg-gray-100/50 rounded-b-md"></div>
             </div>
-            <span className={`text-xs font-semibold ${isSelected ? 'text-red-700' : 'text-slate-600'}`}>
+            <span className={`text-xs text-center font-bold ${isSelected ? 'text-red-600' : 'text-slate-700'}`}>
               {tubeType}
             </span>
           </button>
