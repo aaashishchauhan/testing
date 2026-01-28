@@ -1,0 +1,7 @@
+{
+  "name": "Mobile Sample Collection",
+  "description": "A mobile-first web application for healthcare professionals to log and manage the collection of medical test samples. It features a streamlined, intuitive interface for multiple labs, various specimen types, and visual test tube selection to minimize errors.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
